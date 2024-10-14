@@ -1,18 +1,32 @@
 /*Función a la que pasando un array me diga los repetidos de cada elemento
 Ej: [2,3,2,2] -> [3,1]*/
 
-var indices = [];
-var array = [2, 3, 3, 2, 3, 2, 3];
-var element = 3;
+function repetidos(array) {
+    var elementos = [];
+    var repeticiones = [];
 
-function repetidos (array){
-    var id = array.indexOf(element);
+    for (var i = 0; i < array.length; i++) {
+        var elemento = array[i];
+        var encontrado = false;
 
-    while (id != -1) {
-        indices.push(id);
-        id = array.indexOf(element, id + 1);
+        // Compruebo si el elemento ya ha sido contado
+        for (var j = 0; j < elementos.length; j++) {
+            if (elementos[j] === elemento) {
+                repeticiones[j]++;
+                encontrado = true;
+                break;
+            }
+        }
+
+        // Si no lo hemos contado aún, lo añadimos:
+        if (!encontrado) {
+            elementos.push(elemento);
+            repeticiones.push(1);
+        }
     }
-return indices.length;
+
+    return repeticiones;
 }
 
-console.log(repetidos(array));
+var array = [2, 3, 2, 2, 3, 2, 3];
+console.log(repetidos(array)); 
